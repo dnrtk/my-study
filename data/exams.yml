@@ -1,0 +1,17 @@
+exams:
+  - id: aws-dae
+    name: "AWS Certified Data Engineer - Associate (DEA-C01)"
+    description: "AWS データエンジニア アソシエイト"
+    categories:
+      - id: ingestion-transformation
+        name: "データ収集と変換"
+        file: "ingestion-transformation.yml"
+      - id: data-store
+        name: "データストア管理"
+        file: "data-store.yml"
+      - id: data-operations
+        name: "データ運用とサポート"
+        file: "data-operations.yml"
+      - id: security-governance
+        name: "データセキュリティとガバナンス"
+        file: "security-governance.yml"
