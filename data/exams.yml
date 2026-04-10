@@ -1,4 +1,36 @@
 exams:
+  - id: jhs-social-history
+    name: "中学受験 社会（日本の歴史）"
+    description: "中学受験対策：日本史を時代別に学習"
+    categories:
+      - id: prehistoric-ancient
+        name: "縄文・弥生・古墳時代"
+        file: "prehistoric-ancient.yml"
+      - id: asuka-nara
+        name: "飛鳥・奈良時代"
+        file: "asuka-nara.yml"
+      - id: heian
+        name: "平安時代"
+        file: "heian.yml"
+      - id: kamakura
+        name: "鎌倉時代"
+        file: "kamakura.yml"
+      - id: muromachi-sengoku
+        name: "室町・戦国時代"
+        file: "muromachi-sengoku.yml"
+      - id: edo
+        name: "江戸時代"
+        file: "edo.yml"
+      - id: meiji
+        name: "明治時代"
+        file: "meiji.yml"
+      - id: taisho-showa-prewar
+        name: "大正・昭和（戦前）"
+        file: "taisho-showa-prewar.yml"
+      - id: showa-postwar-modern
+        name: "昭和（戦後）・現代"
+        file: "showa-postwar-modern.yml"
+
   - id: aws-dae
     name: "AWS Certified Data Engineer - Associate (DEA-C01)"
     description: "AWS データエンジニア アソシエイト"
