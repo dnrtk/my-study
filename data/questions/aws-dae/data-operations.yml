@@ -105,7 +105,7 @@ questions:
     text: "企業のデータパイプラインでは、Amazon Redshiftクラスターに対して複数のETLジョブが並行して書き込みを行っている。最近、クエリのパフォーマンスが著しく低下している。原因を特定するために最初に確認すべきものはどれか。"
     choices:
       - id: "a"
-        text: "Amazon Redshiftのシステムテーブル（STL_ALERT_EVENT_LOG、SVL_QUERY_SUMMARY）を確認し、クエリの実行計画とアラートを分析する"
+        text: "Amazon Redshiftのシステムテーブルを確認し、クエリの実行計画とアラートを分析する"
         explanation: "正しい。Redshiftのシステムテーブルはクエリパフォーマンスの診断に最も有用である。STL_ALERT_EVENT_LOGはクエリ実行中の問題（ディスクスピル、不均等なデータ分散など）を記録し、SVL_QUERY_SUMMARYはクエリの実行計画の詳細を提供する。"
       - id: "b"
         text: "CloudWatchのRedshiftメトリクスでCPU使用率とディスク使用量を確認する"
@@ -292,7 +292,7 @@ questions:
     text: "企業がAWS CloudFormationを使用して、Amazon Redshiftクラスターと関連するAWS Glueリソース（Data Catalogデータベース、クローラー、ETLジョブ）を一括でプロビジョニングしたい。VPC内のRedshiftクラスターにGlueジョブからJDBC接続する構成を含む必要がある。CloudFormationテンプレートの設計で最も重要な考慮事項はどれか。"
     choices:
       - id: "a"
-        text: "CloudFormationテンプレートにVPCセキュリティグループの自己参照インバウンドルール（TCP 0-65535）を含め、Glue接続リソースにVPCサブネットとセキュリティグループを明示的に設定する"
+        text: "CloudFormationテンプレートにVPCセキュリティグループの自己参照インバウンドルールを含め、Glue接続リソースにVPCサブネットとセキュリティグループを明示的に設定する"
         explanation: "正しい。GlueジョブがVPC内のRedshiftに接続するには、Glue接続リソースにVPCのサブネットとセキュリティグループを指定する必要がある。セキュリティグループには自己参照のインバウンドルール（全TCPポート）を設定しないと、Glue ENI間の通信が失敗する。CloudFormationではこれらのクロスサービス依存関係を明示的に定義することが不可欠である。"
       - id: "b"
         text: "RedshiftクラスターとGlueリソースを別々のCloudFormationスタックに分離し、スタック間の依存関係は設定しない"
@@ -343,7 +343,7 @@ questions:
     text: "データレイク上に蓄積された大量のログデータ（S3上にParquet形式で保存、年/月/日/時でパーティション分割）に対してAmazon Athenaでクエリを実行している。AWS Glueクローラーでパーティションを登録しているが、新しいパーティションの追加に時間がかかり、Glue APIのスロットリングが発生している。クエリコストとパーティション管理の負荷を同時に削減する最も効果的な方法はどれか。"
     choices:
       - id: "a"
-        text: "Athenaのパーティション射影（Partition Projection）を有効化し、テーブルプロパティでパーティションキーの型・範囲・形式を定義する"
+        text: "Athenaのパーティション射影を有効化し、テーブルプロパティでパーティションキーの型・範囲・形式を定義する"
         explanation: "正しい。パーティション射影を使用すると、AthenaがGlue Data Catalogへのメタデータ取得を行わず、テーブルプロパティに定義された規則からパーティション値とS3パスをインメモリで計算する。これによりGlueクローラーの実行やMSCK REPAIR TABLEが不要になり、Glue APIスロットリングの問題が解消される。加えてクエリ開始までの遅延が短縮され、パーティションフィルタによるスキャン量の削減でコストも低下する。"
       - id: "b"
         text: "Glueクローラーの実行頻度を増やして、新しいパーティションをより速く検出する"
@@ -377,7 +377,7 @@ questions:
     text: "データパイプラインのAWS Glue ETLジョブで、JDBC接続文字列やAPIキーなどの設定値を管理している。これらの設定値は環境（開発・ステージング・本番）ごとに異なり、バージョン管理と変更追跡が必要である。機密性の高い値は暗号化して保存したい。最も適切な方法はどれか。"
     choices:
       - id: "a"
-        text: "AWS Systems Manager Parameter Storeを使用し、階層構造（/pipeline/dev/、/pipeline/prod/等）でパラメータを整理する。機密値はSecureString型でKMS暗号化し、GlueジョブのIAMロールにssm:GetParameterの権限を付与する"
+        text: "AWS Systems Manager Parameter Storeを使用し、階層構造でパラメータを整理する。機密値はSecureString型でKMS暗号化し、GlueジョブのIAMロールにssm:GetParameterの権限を付与する"
         explanation: "正しい。Parameter Storeは階層構造でパラメータを整理でき、環境ごとのプレフィックス（/pipeline/dev/db-url等）で管理が容易である。SecureString型はKMSで暗号化されるため機密値の保護に適し、パラメータのバージョン管理と変更履歴の追跡も標準機能として提供される。標準パラメータは無料で利用可能である。"
       - id: "b"
         text: "Glue ETLジョブのスクリプト内にハードコーディングし、環境ごとに異なるスクリプトファイルを管理する"

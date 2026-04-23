@@ -5,7 +5,10 @@
       "Bash(uv run:*)",
       "WebSearch",
       "Bash(wc:*)",
-      "Bash(gh repo:*)"
+      "Bash(gh repo:*)",
+      "Bash(grep:*)",
+      "Bash(python3 -c ' *)",
+      "Bash(python -c ' *)"
     ]
   }
 }

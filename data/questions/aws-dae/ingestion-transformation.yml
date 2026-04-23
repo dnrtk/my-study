@@ -3,7 +3,7 @@ questions:
     text: "ある企業は、オンプレミスのMySQLデータベースからAmazon S3へデータを移行し、日次バッチでデータレイクに取り込む必要がある。初回のフルロード後、変更されたデータのみを継続的にキャプチャしたい。最も適切なソリューションはどれか。"
     choices:
       - id: "a"
-        text: "AWS DMSを使用してフルロードおよび変更データキャプチャ（CDC）を構成し、ターゲットとしてAmazon S3を指定する"
+        text: "AWS DMSを使用してフルロードおよび変更データキャプチャを構成し、ターゲットとしてAmazon S3を指定する"
         explanation: "正しい。AWS DMSはフルロードとCDCの両方をサポートし、MySQLからS3への継続的なデータレプリケーションに最適である。CDCにより変更分のみをキャプチャできる。"
       - id: "b"
         text: "AWS Glueクローラーを使用してオンプレミスのMySQLデータベースに接続し、定期的にデータを抽出する"
@@ -122,7 +122,7 @@ questions:
     text: "ある企業は、Apache KafkaベースのストリーミングアーキテクチャをAWSに移行したい。既存のKafkaプロデューサーとコンシューマーのコードを最小限の変更で利用し、インフラストラクチャの管理負荷を軽減したい。最も適切なサービスはどれか。"
     choices:
       - id: "a"
-        text: "Amazon Managed Streaming for Apache Kafka（Amazon MSK）"
+        text: "Amazon Managed Streaming for Apache Kafka"
         explanation: "正しい。Amazon MSKはApache Kafka互換のフルマネージドサービスであり、既存のKafkaプロデューサー・コンシューマーのコードをそのまま利用できる。クラスター管理の負荷を大幅に軽減する。"
       - id: "b"
         text: "Amazon Kinesis Data Streams"
@@ -156,7 +156,7 @@ questions:
     text: "あるリアルタイム分析アプリケーションは、Amazon Kinesis Data Streamsからデータを読み取り、5分間のウィンドウ集計を行い、結果をAmazon OpenSearchに書き込む必要がある。SQLベースのクエリで開発したい。最も適切なサービスはどれか。"
     choices:
       - id: "a"
-        text: "Amazon Managed Service for Apache Flink（SQLアプリケーション）"
+        text: "Amazon Managed Service for Apache Flink"
         explanation: "正しい。Amazon Managed Service for Apache FlinkはSQLベースのストリーム処理をサポートし、ウィンドウ集計やKinesis Data Streamsとの統合が組み込みで提供される。OpenSearchへの出力もサポートしている。"
       - id: "b"
         text: "AWS Lambda関数でKinesis Data Streamsのコンシューマーを実装する"
@@ -326,7 +326,7 @@ questions:
     text: "データエンジニアは、Amazon Managed Service for Apache Flinkを使用してKinesis Data Streamsからのストリームデータを処理している。各レコードを正確に1回だけ処理（Exactly-once）する必要があり、複数のコンシューマーアプリケーションがそれぞれ独立したスループットでデータを読み取る必要がある。最も適切な構成はどれか。"
     choices:
       - id: "a"
-        text: "Kinesis Data Streamsの拡張ファンアウト（Enhanced Fan-Out）コンシューマーを各アプリケーションに登録し、FlinkのチェックポイントでExactly-onceセマンティクスを有効にする"
+        text: "Kinesis Data Streamsの拡張ファンアウトコンシューマーを各アプリケーションに登録し、FlinkのチェックポイントでExactly-onceセマンティクスを有効にする"
         explanation: "正しい。拡張ファンアウト（EFO）はコンシューマーごとにシャードあたり2MB/秒の専用読み取りスループットを提供し、複数コンシューマーが互いに影響を与えずにデータを読み取れる。FlinkのKinesisStreamsSourceはExactly-onceセマンティクスをサポートしており、チェックポイントメカニズムと組み合わせることで各レコードが正確に1回処理されることを保証する。EFOはHTTP/2プッシュモデルにより約65%のレイテンシ削減も実現する。"
       - id: "b"
         text: "Kinesis Data Streamsの標準コンシューマーを使用し、各アプリケーションでGetRecords APIを呼び出す"
@@ -411,7 +411,7 @@ questions:
     text: "ある企業は、複数のマイクロサービスから発生するイベントをAmazon S3のデータレイクに取り込むパイプラインを構築している。イベントは一時的なスパイクが発生する可能性があり、取り込み処理のスケーラビリティとメッセージの紛失防止が必要である。処理に失敗したイベントは後から再処理できるようにしたい。最も適切なアーキテクチャはどれか。"
     choices:
       - id: "a"
-        text: "マイクロサービスからAmazon SQSキューにイベントを送信し、AWS Lambda関数のSQSイベントソースマッピングで処理してS3に書き込む。デッドレターキュー（DLQ）を設定して処理失敗イベントを隔離する"
+        text: "マイクロサービスからAmazon SQSキューにイベントを送信し、AWS Lambda関数のSQSイベントソースマッピングで処理してS3に書き込む。デッドレターキューを設定して処理失敗イベントを隔離する"
         explanation: "正しい。SQSはスパイク時のバッファとして機能し、メッセージの永続化により紛失を防止する。LambdaのSQSイベントソースマッピングはプロビジョンドモードにより最大20,000の同時実行、毎分1,000の同時実行追加が可能であり、高いスケーラビリティを持つ。DLQにより処理失敗イベントを隔離し、後から再処理できる。SQSの可視性タイムアウトとリトライにより、At-least-onceの配信保証も得られる。"
       - id: "b"
         text: "マイクロサービスからAmazon Kinesis Data Streamsにイベントを直接送信し、Lambda関数でコンシュームしてS3に書き込む"
