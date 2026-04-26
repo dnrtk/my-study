@@ -47,3 +47,26 @@ exams:
       - id: security-governance
         name: "データセキュリティとガバナンス"
         file: "security-governance.yml"
+
+  - id: aicx-ai-agent-strategist
+    name: "AICX協会 AIエージェント・ストラテジスト"
+    description: "AIエージェントの戦略立案・設計・運用に関する知識を体系的に学習"
+    categories:
+      - id: fundamentals
+        name: "AIエージェントとLLMの基礎"
+        file: "fundamentals.yml"
+      - id: design-architecture
+        name: "エージェント設計とアーキテクチャ"
+        file: "design-architecture.yml"
+      - id: rag-knowledge
+        name: "RAGと知識統合戦略"
+        file: "rag-knowledge.yml"
+      - id: business-cx-strategy
+        name: "ビジネス戦略とCX活用"
+        file: "business-cx-strategy.yml"
+      - id: governance-ethics
+        name: "ガバナンス・倫理・リスク管理"
+        file: "governance-ethics.yml"
+      - id: evaluation-operations
+        name: "評価・運用・改善戦略"
+        file: "evaluation-operations.yml"
